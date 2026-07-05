@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
 
 import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/site/SocialIcons";
+import { TopoLines } from "@/components/site/Decor";
 import type { ConfiguracoesGerais, Seguro } from "@/sanity/types";
 
 export function Footer({
@@ -15,8 +16,9 @@ export function Footer({
   const enderecoPrincipal = config.enderecos?.find((e) => e.principal) ?? config.enderecos?.[0];
 
   return (
-    <footer className="bg-brand-navy text-white">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-14 md:grid-cols-4">
+    <footer className="texture-grain relative overflow-hidden bg-brand-navy text-white">
+      <TopoLines className="text-white/[0.05]" />
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-14 md:grid-cols-4">
         <div>
           <h3 className="mb-4 text-sm font-semibold text-brand-blue">Nossa Empresa</h3>
           <ul className="space-y-2 text-sm text-white/80">
@@ -89,7 +91,7 @@ export function Footer({
         </div>
       </div>
 
-      <div className="border-t border-white/10">
+      <div className="relative border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-6 text-xs text-white/60 md:flex-row">
           <div className="space-y-1 text-center md:text-left">
             {config.razaoSocial && <p>Razão Social: {config.razaoSocial}</p>}

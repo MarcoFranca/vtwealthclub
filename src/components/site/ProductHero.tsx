@@ -4,12 +4,13 @@ import { ChevronRight } from "lucide-react";
 import { resolveIcon } from "@/lib/icons";
 import { categoriaLabels, type Seguro } from "@/sanity/types";
 import { Reveal } from "./motion/Reveal";
+import { TopoLines } from "./Decor";
 
 export function ProductHero({ seguro }: { seguro: Seguro }) {
   const Icon = resolveIcon(seguro.beneficios?.[0]?.icone);
 
   return (
-    <section className="relative overflow-hidden bg-brand-navy pt-16 pb-20 md:pt-20 md:pb-24">
+    <section className="texture-grain relative overflow-hidden bg-brand-navy pt-16 pb-20 md:pt-20 md:pb-24">
       <div
         className="absolute inset-0 opacity-20"
         style={{
@@ -17,6 +18,7 @@ export function ProductHero({ seguro }: { seguro: Seguro }) {
             "radial-gradient(circle at 15% 20%, var(--brand-blue) 0%, transparent 45%), radial-gradient(circle at 85% 70%, var(--brand-blue) 0%, transparent 40%)",
         }}
       />
+      <TopoLines className="text-white/[0.07]" />
       <Reveal className="relative mx-auto max-w-4xl px-6 text-center">
         {/* Breadcrumb */}
         <nav className="mb-6 flex items-center justify-center gap-1.5 text-sm text-white/60">

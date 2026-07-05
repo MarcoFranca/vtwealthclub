@@ -10,6 +10,7 @@ import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/site/motion/Reveal";
 import { HeroBackdrop } from "@/components/site/motion/HeroBackdrop";
 import { VictorPhotos } from "@/components/site/VictorPhotos";
+import { TopoLines, DotGrid } from "@/components/site/Decor";
 import { getConfiguracoesGerais, getDepoimentos, getSeguros } from "@/sanity/lib/queries";
 
 const pilares = [
@@ -145,8 +146,9 @@ export default async function HomePage() {
       </section>
 
       {/* Categorias de seguro */}
-      <section className="bg-muted/40 py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="relative overflow-hidden bg-gradient-to-b from-white via-brand-soft/30 to-white py-16 md:py-24">
+        <DotGrid id="dots-seguros" className="text-brand-navy/[0.06]" />
+        <div className="relative mx-auto max-w-7xl px-6">
           <Reveal>
             <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">Seguros</p>
             <div className="flex flex-wrap items-end justify-between gap-4">
@@ -173,8 +175,9 @@ export default async function HomePage() {
       </section>
 
       {/* CTA consultoria financeira */}
-      <section className="bg-brand-navy py-12 md:py-16">
-        <Reveal className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-6 md:flex-row md:items-center md:justify-between">
+      <section className="texture-grain relative overflow-hidden bg-gradient-to-r from-brand-navy via-brand-navy-light to-brand-navy py-12 md:py-16">
+        <TopoLines className="text-white/[0.07]" />
+        <Reveal className="relative mx-auto flex max-w-7xl flex-col items-start gap-6 px-6 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="font-heading text-4xl font-semibold text-white">Experiência em Consultoria Financeira</h2>
             <p className="mt-2 max-w-xl text-white/80">
@@ -219,8 +222,10 @@ export default async function HomePage() {
       </section>
 
       {/* Depoimentos */}
-      <section className="bg-brand-navy py-16 md:py-24">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 md:grid-cols-2">
+      <section className="texture-grain relative overflow-hidden bg-brand-navy py-16 md:py-24">
+        <TopoLines className="text-white/[0.06]" />
+        <div className="absolute -left-32 top-1/2 size-96 -translate-y-1/2 rounded-full bg-brand-blue/20 blur-3xl" />
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 md:grid-cols-2">
           <Reveal>
             <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">Testemunhos</p>
             <h2 className="font-heading text-4xl font-semibold text-white">Histórias reais, satisfações reais</h2>

@@ -39,34 +39,36 @@ export function Header({
 
   return (
     <header className="sticky top-0 z-50">
-      {/* Top bar */}
+      {/* Top bar — recolhe totalmente ao rolar (sem deixar margem branca) */}
       <div
         className={cn(
-          "hidden items-center justify-between border-b bg-white px-6 text-sm text-muted-foreground transition-all duration-300 md:flex",
-          scrolled ? "py-0 opacity-0" : "py-2 opacity-100"
+          "hidden overflow-hidden bg-white transition-all duration-300 md:block",
+          scrolled ? "max-h-0 opacity-0" : "max-h-12 border-b border-border opacity-100"
         )}
       >
-        <div className="flex items-center gap-6">
-          {config.email && (
-            <a href={`mailto:${config.email}`} className="flex items-center gap-2 hover:text-brand-blue">
-              <Mail className="size-4" />
-              {config.email}
+        <div className="flex items-center justify-between px-6 py-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-6">
+            {config.email && (
+              <a href={`mailto:${config.email}`} className="flex items-center gap-2 hover:text-brand-blue">
+                <Mail className="size-4" />
+                {config.email}
+              </a>
+            )}
+          </div>
+          {config.telefone && (
+            <a href={`tel:${config.telefone.replace(/\D/g, "")}`} className="flex items-center gap-2 hover:text-brand-blue">
+              <Phone className="size-4" />
+              {config.telefone}
             </a>
           )}
         </div>
-        {config.telefone && (
-          <a href={`tel:${config.telefone.replace(/\D/g, "")}`} className="flex items-center gap-2 hover:text-brand-blue">
-            <Phone className="size-4" />
-            {config.telefone}
-          </a>
-        )}
       </div>
 
-      {/* Main nav */}
+      {/* Barra de navegação */}
       <div
         className={cn(
           "bg-brand-navy px-6 transition-all duration-300",
-          scrolled ? "py-2 shadow-lg" : "py-3"
+          scrolled ? "py-2 shadow-lg shadow-brand-navy/20" : "py-3"
         )}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between">
@@ -158,36 +160,38 @@ export function Header({
             {mobileOpen ? <X className="size-6" /> : <Menu className="size-6" />}
           </button>
         </div>
-      </div>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="border-b bg-white p-4 lg:hidden">
-          <nav className="flex flex-col gap-3">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Seguros</p>
-            {seguros.map((seguro) => (
-              <Link
-                key={seguro._id}
-                href={`/seguros/${seguro.slug}`}
-                className="text-sm"
-                onClick={() => setMobileOpen(false)}
-              >
-                {seguro.title}
+        {/* Mobile menu — dentro da barra fixa */}
+        {mobileOpen && (
+          <div className="mx-auto mt-3 max-w-7xl border-t border-white/10 pt-4 lg:hidden">
+            <nav className="flex flex-col gap-3">
+              <p className="text-xs font-semibold uppercase tracking-wide text-white/50">Seguros</p>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                {seguros.map((seguro) => (
+                  <Link
+                    key={seguro._id}
+                    href={`/seguros/${seguro.slug}`}
+                    className="text-sm text-white/90"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {seguro.title}
+                  </Link>
+                ))}
+              </div>
+              <hr className="border-white/10" />
+              <Link href="/servicos" className="font-medium text-white" onClick={() => setMobileOpen(false)}>
+                Serviços
               </Link>
-            ))}
-            <hr />
-            <Link href="/servicos" className="font-medium" onClick={() => setMobileOpen(false)}>
-              Serviços
-            </Link>
-            <Link href="/contato" className="font-medium" onClick={() => setMobileOpen(false)}>
-              Contato
-            </Link>
-            <Button asChild className="mt-2 bg-brand-blue hover:bg-brand-blue-dark">
-              <Link href="/contato">Peça sua cotação</Link>
-            </Button>
-          </nav>
-        </div>
-      )}
+              <Link href="/contato" className="font-medium text-white" onClick={() => setMobileOpen(false)}>
+                Contato
+              </Link>
+              <Button asChild className="mt-2 bg-brand-blue hover:bg-brand-blue-dark">
+                <Link href="/contato">Peça sua cotação</Link>
+              </Button>
+            </nav>
+          </div>
+        )}
+      </div>
     </header>
   );
 }
