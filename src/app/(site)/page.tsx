@@ -45,7 +45,7 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-brand-navy pb-44 pt-28">
-        {/* Foto de fundo (baixa resolução propositalmente suavizada pelo overlay) */}
+        {/* Foto de fundo em alta — visível, com overlay para leitura do texto */}
         <div className="absolute inset-0">
           <Image
             src="/photos/hero-familia.jpg"
@@ -53,9 +53,12 @@ export default async function HomePage() {
             fill
             priority
             sizes="100vw"
-            className="scale-105 object-cover object-center blur-[2px]"
+            className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-navy/95 via-brand-navy/90 to-brand-navy" />
+          {/* Overlay: forte no topo (nav) e na base (card), respira no meio */}
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-navy/85 via-brand-navy/45 to-brand-navy" />
+          {/* Vinheta lateral suave para dar foco ao texto central */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,var(--brand-navy)_90%)] opacity-60" />
         </div>
         <HeroBackdrop />
         <div className="relative mx-auto max-w-4xl px-6 text-center">
@@ -65,12 +68,12 @@ export default async function HomePage() {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="font-heading text-5xl font-semibold text-white md:text-6xl">
+            <h1 className="font-heading text-5xl font-semibold text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.35)] md:text-6xl">
               Protegendo o que mais importa
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mx-auto mt-5 max-w-xl text-lg text-white/80">
+            <p className="mx-auto mt-5 max-w-xl text-lg text-white/90 drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)]">
               Seu bem mais valioso, com o futuro protegido!
             </p>
           </Reveal>
