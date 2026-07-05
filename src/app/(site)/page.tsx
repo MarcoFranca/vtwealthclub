@@ -48,7 +48,7 @@ export default async function HomePage() {
         {/* Foto de fundo em alta — visível, com overlay para leitura do texto */}
         <div className="absolute inset-0">
           <Image
-            src="/photos/hero-familia.jpg"
+            src="/photos/hero-familia-hd.jpg"
             alt=""
             fill
             priority
@@ -204,7 +204,17 @@ export default async function HomePage() {
       </section>
 
       {/* Pilares */}
-      <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
+      <section className="relative overflow-hidden py-16 md:py-24">
+        {/* Marca d'água topográfica */}
+        <Image
+          src="/photos/10-analog-topographical-objects-XDP7BJ.png"
+          alt=""
+          width={1920}
+          height={1280}
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-24 top-1/2 w-[60%] max-w-none -translate-y-1/2 opacity-[0.05]"
+        />
+        <div className="relative mx-auto max-w-7xl px-6">
         <Reveal>
           <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">Serviços</p>
           <h2 className="max-w-2xl font-heading text-4xl font-semibold text-brand-navy">
@@ -222,11 +232,20 @@ export default async function HomePage() {
             </StaggerItem>
           ))}
         </StaggerGroup>
+        </div>
       </section>
 
       {/* Depoimentos */}
       <section className="texture-grain relative overflow-hidden bg-brand-navy py-16 md:py-24">
-        <TopoLines className="text-white/[0.06]" />
+        {/* Marca d'água topográfica da marca (arte real) */}
+        <Image
+          src="/photos/10-analog-topographical-objects-XDP7BJd.png"
+          alt=""
+          width={1920}
+          height={1280}
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-32 bottom-0 w-[65%] max-w-none opacity-40 mix-blend-screen"
+        />
         <div className="absolute -left-32 top-1/2 size-96 -translate-y-1/2 rounded-full bg-brand-blue/20 blur-3xl" />
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 md:grid-cols-2">
           <Reveal>

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "motion/react";
 
 export function HeroBackdrop() {
@@ -16,15 +15,22 @@ export function HeroBackdrop() {
         animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.1, 1] }}
         transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
-      {/* Topografia da marca (arte real) */}
-      <Image
-        src="/photos/10-analog-topographical-objects-XDP7BJd.png"
-        alt=""
-        width={1920}
-        height={1280}
+      <svg
+        className="absolute inset-0 h-full w-full opacity-[0.15]"
+        viewBox="0 0 800 500"
+        fill="none"
+        preserveAspectRatio="xMidYMid slice"
         aria-hidden="true"
-        className="pointer-events-none absolute -right-24 bottom-0 h-auto w-[70%] max-w-none opacity-50 mix-blend-screen"
-      />
+      >
+        {Array.from({ length: 8 }).map((_, i) => (
+          <path
+            key={i}
+            d={`M ${-50 + i * 20} 500 C ${150 + i * 15} ${350 - i * 12}, ${450 + i * 10} ${420 - i * 10}, ${850 + i * 10} ${180 - i * 15}`}
+            stroke="white"
+            strokeWidth="1"
+          />
+        ))}
+      </svg>
     </div>
   );
 }
