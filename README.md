@@ -81,6 +81,11 @@ Sem `RESEND_API_KEY`, os endpoints dos formularios falham de forma controlada e 
 O Studio esta integrado ao app em:
 
 - [src/app/studio/[[...tool]]/page.tsx](E:/Autentika/Projetos/Programas/vtwealthclub/src/app/studio/[[...tool]]/page.tsx:1)
+- [src/app/studio/[[...tool]]/StudioClient.tsx](E:/Autentika/Projetos/Programas/vtwealthclub/src/app/studio/[[...tool]]/StudioClient.tsx:1)
+
+Observacao tecnica:
+
+- o Studio foi isolado em um Client Component para evitar erro de build do Turbopack com a importacao server-side do Sanity Studio.
 
 Depois de deploy na Vercel, o acesso esperado e:
 
