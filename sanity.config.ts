@@ -8,6 +8,7 @@ import { schemaTypes } from "./src/sanity/schemaTypes";
 export default defineConfig({
   name: "vtwealthclub",
   title: "VT Wealth Club",
+  basePath: "/studio",
   projectId,
   dataset,
   schema: { types: schemaTypes },
