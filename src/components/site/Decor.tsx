@@ -62,3 +62,27 @@ export function RadialGlow({ className }: { className?: string }) {
     />
   );
 }
+
+/**
+ * Véu de transição suave para abrir ou encerrar seções sem criar cortes duros.
+ */
+export function SectionVeil({
+  position,
+  className,
+}: {
+  position: "top" | "bottom";
+  className?: string;
+}) {
+  return (
+    <div
+      aria-hidden="true"
+      className={cn(
+        "pointer-events-none absolute inset-x-0 z-0 h-24",
+        position === "top"
+          ? "top-0 bg-gradient-to-b from-white/80 via-white/35 to-transparent"
+          : "bottom-0 bg-gradient-to-t from-white/80 via-white/35 to-transparent",
+        className
+      )}
+    />
+  );
+}

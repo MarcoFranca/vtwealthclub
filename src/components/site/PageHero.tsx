@@ -1,5 +1,5 @@
 import { Reveal } from "./motion/Reveal";
-import { TopoLines } from "./Decor";
+import { RadialGlow, SectionVeil, TopoLines } from "./Decor";
 
 export function PageHero({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
@@ -11,7 +11,9 @@ export function PageHero({ title, subtitle }: { title: string; subtitle?: string
             "radial-gradient(circle at 20% 20%, var(--brand-blue) 0%, transparent 45%), radial-gradient(circle at 80% 60%, var(--brand-blue) 0%, transparent 40%)",
         }}
       />
+      <RadialGlow className="-left-10 top-10 size-64 bg-brand-blue/15" />
       <TopoLines className="text-white/[0.07]" />
+      <SectionVeil position="bottom" className="h-20 from-brand-navy/85 via-brand-navy/45" />
       <Reveal className="relative mx-auto max-w-7xl px-6 text-center">
         <h1 className="font-heading text-4xl font-semibold text-white md:text-5xl">{title}</h1>
         {subtitle && <p className="mx-auto mt-3 max-w-2xl text-white/80">{subtitle}</p>}
