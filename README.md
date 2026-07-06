@@ -183,3 +183,5 @@ pnpm seed
 - O projeto ainda tinha um `README` generico de create-next-app; este arquivo agora passa a ser a documentacao base do repositorio.
 - O acesso ao Studio depende de novo deploy apos a integracao da rota `/studio`.
 - Se houver erro 404 em `/studio`, conferir se a versao publicada na Vercel ja contem a rota criada neste repositorio.
+- Header e footer passaram por refinamento visual para melhorar alinhamento, leitura institucional e acabamento premium.
+- As transicoes entre secoes usam veus, gradientes e brilhos sutis para evitar cortes visuais chapados sem poluir a interface.

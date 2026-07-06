@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react";
 import { resolveIcon } from "@/lib/icons";
 import { categoriaLabels, type Seguro } from "@/sanity/types";
 import { Reveal } from "./motion/Reveal";
-import { TopoLines } from "./Decor";
+import { RadialGlow, SectionVeil, TopoLines } from "./Decor";
 
 export function ProductHero({ seguro }: { seguro: Seguro }) {
   const Icon = resolveIcon(seguro.beneficios?.[0]?.icone);
@@ -18,7 +18,9 @@ export function ProductHero({ seguro }: { seguro: Seguro }) {
             "radial-gradient(circle at 15% 20%, var(--brand-blue) 0%, transparent 45%), radial-gradient(circle at 85% 70%, var(--brand-blue) 0%, transparent 40%)",
         }}
       />
+      <RadialGlow className="-right-12 top-1/3 size-72 bg-brand-blue/15" />
       <TopoLines className="text-white/[0.07]" />
+      <SectionVeil position="bottom" className="h-20 from-brand-navy/85 via-brand-navy/45" />
       <Reveal className="relative mx-auto max-w-4xl px-6 text-center">
         {/* Breadcrumb */}
         <nav className="mb-6 flex items-center justify-center gap-1.5 text-sm text-white/60">

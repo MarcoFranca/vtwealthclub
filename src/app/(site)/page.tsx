@@ -10,7 +10,7 @@ import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/site/motion/Reveal";
 import { HeroBackdrop } from "@/components/site/motion/HeroBackdrop";
 import { VictorPhotos } from "@/components/site/VictorPhotos";
-import { TopoLines, DotGrid } from "@/components/site/Decor";
+import { TopoLines, DotGrid, RadialGlow, SectionVeil } from "@/components/site/Decor";
 import { getConfiguracoesGerais, getDepoimentos, getSeguros } from "@/sanity/lib/queries";
 
 const pilares = [
@@ -61,6 +61,7 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,var(--brand-navy)_90%)] opacity-60" />
         </div>
         <HeroBackdrop />
+        <SectionVeil position="bottom" className="h-32 from-brand-navy via-brand-navy/50" />
         <div className="relative mx-auto max-w-4xl px-6 text-center">
           <Reveal>
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">
@@ -105,15 +106,18 @@ export default async function HomePage() {
       </section>
 
       {/* Quote block, overlapping hero */}
-      <div className="relative -mt-28">
+      <div className="relative z-20 -mt-28">
         <Reveal delay={0.15} y={40}>
           <QuoteBlock seguros={seguros} config={config} />
         </Reveal>
       </div>
 
       {/* Sobre Victor Tarouquella */}
-      <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-        <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
+      <section className="relative overflow-hidden py-16 md:py-24">
+        <SectionVeil position="top" className="from-white via-white/70" />
+        <RadialGlow className="-left-12 top-24 size-56 bg-brand-blue/10" />
+        <RadialGlow className="right-0 top-1/2 size-72 bg-brand-soft/80" />
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 md:grid-cols-2">
           <Reveal>
             <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">
               Sobre Victor Tarouquella
@@ -151,6 +155,15 @@ export default async function HomePage() {
       {/* Categorias de seguro */}
       <section className="relative overflow-hidden bg-gradient-to-b from-white via-brand-soft/30 to-white py-16 md:py-24">
         <DotGrid id="dots-seguros" className="text-brand-navy/[0.06]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white via-white/80 to-transparent" />
+        <Image
+          src="/photos/10-analog-topographical-objects-XDP7BJc.png"
+          alt=""
+          width={1920}
+          height={1280}
+          aria-hidden="true"
+          className="pointer-events-none absolute right-[-14rem] top-10 w-[34rem] max-w-none opacity-[0.07]"
+        />
         <div className="relative mx-auto max-w-7xl px-6">
           <Reveal>
             <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">Seguros</p>
@@ -180,6 +193,9 @@ export default async function HomePage() {
       {/* CTA consultoria financeira */}
       <section className="texture-grain relative overflow-hidden bg-gradient-to-r from-brand-navy via-brand-navy-light to-brand-navy py-12 md:py-16">
         <TopoLines className="text-white/[0.07]" />
+        <RadialGlow className="-right-12 top-1/2 size-72 -translate-y-1/2 bg-brand-blue/20" />
+        <SectionVeil position="top" className="h-20 from-white/25 via-white/10" />
+        <SectionVeil position="bottom" className="h-20 from-brand-navy/85 via-brand-navy/40" />
         <Reveal className="relative mx-auto flex max-w-7xl flex-col items-start gap-6 px-6 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="font-heading text-4xl font-semibold text-white">Experiência em Consultoria Financeira</h2>
@@ -204,7 +220,8 @@ export default async function HomePage() {
       </section>
 
       {/* Pilares */}
-      <section className="relative overflow-hidden py-16 md:py-24">
+      <section className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(246,249,252,0.85),white_18%,white_100%)] py-16 md:py-24">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-brand-navy/10 via-white/70 to-transparent" />
         {/* Marca d'água topográfica */}
         <Image
           src="/photos/10-analog-topographical-objects-XDP7BJ.png"
@@ -214,6 +231,7 @@ export default async function HomePage() {
           aria-hidden="true"
           className="pointer-events-none absolute -right-24 top-1/2 w-[60%] max-w-none -translate-y-1/2 opacity-[0.05]"
         />
+        <RadialGlow className="-left-10 bottom-10 size-64 bg-brand-blue/10" />
         <div className="relative mx-auto max-w-7xl px-6">
         <Reveal>
           <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">Serviços</p>
@@ -224,7 +242,7 @@ export default async function HomePage() {
         <StaggerGroup className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {pilares.map((pilar) => (
             <StaggerItem key={pilar.titulo}>
-              <div className="h-full rounded-xl bg-brand-soft p-6 transition-transform hover:-translate-y-1">
+              <div className="h-full rounded-xl border border-brand-navy/5 bg-white/85 p-6 shadow-sm shadow-brand-navy/5 transition-transform hover:-translate-y-1">
                 <ShieldCheck className="mb-3 size-8 text-brand-blue" />
                 <h3 className="font-semibold text-brand-navy">{pilar.titulo}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{pilar.descricao}</p>
@@ -237,6 +255,7 @@ export default async function HomePage() {
 
       {/* Depoimentos */}
       <section className="texture-grain relative overflow-hidden bg-brand-navy py-16 md:py-24">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white/20 to-transparent" />
         {/* Marca d'água topográfica da marca (arte real) */}
         <Image
           src="/photos/10-analog-topographical-objects-XDP7BJd.png"
@@ -262,7 +281,10 @@ export default async function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
+      <section className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(240,246,255,0.7),white_22%)] py-16 md:py-24">
+        <SectionVeil position="top" className="from-brand-soft/60 via-white/50" />
+        <RadialGlow className="right-[-4rem] top-0 size-72 bg-brand-soft/70" />
+        <div className="relative mx-auto max-w-7xl px-6">
         <Reveal>
           <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">FAQs</p>
           <h2 className="max-w-2xl font-heading text-4xl font-semibold text-brand-navy">
@@ -276,6 +298,7 @@ export default async function HomePage() {
         <Reveal delay={0.1} className="mt-10">
           <FaqAccordion />
         </Reveal>
+        </div>
       </section>
     </>
   );

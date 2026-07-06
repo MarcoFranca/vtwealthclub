@@ -46,21 +46,25 @@ export function Header({
           scrolled ? "max-h-0 opacity-0" : "max-h-12 border-b border-border opacity-100"
         )}
       >
-        <div className="flex items-center justify-between px-6 py-2 text-sm text-muted-foreground">
-          <div className="flex items-center gap-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-center px-6 py-2 text-sm text-muted-foreground">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-center">
             {config.email && (
               <a href={`mailto:${config.email}`} className="flex items-center gap-2 hover:text-brand-blue">
                 <Mail className="size-4" />
                 {config.email}
               </a>
             )}
+            {config.email && config.telefone && <span className="text-border">|</span>}
+            {config.telefone && (
+              <a
+                href={`tel:${config.telefone.replace(/\D/g, "")}`}
+                className="flex items-center gap-2 hover:text-brand-blue"
+              >
+                <Phone className="size-4" />
+                {config.telefone}
+              </a>
+            )}
           </div>
-          {config.telefone && (
-            <a href={`tel:${config.telefone.replace(/\D/g, "")}`} className="flex items-center gap-2 hover:text-brand-blue">
-              <Phone className="size-4" />
-              {config.telefone}
-            </a>
-          )}
         </div>
       </div>
 
