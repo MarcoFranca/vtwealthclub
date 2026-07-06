@@ -185,3 +185,5 @@ pnpm seed
 - Se houver erro 404 em `/studio`, conferir se a versao publicada na Vercel ja contem a rota criada neste repositorio.
 - Header e footer passaram por refinamento visual para melhorar alinhamento, leitura institucional e acabamento premium.
 - As transicoes entre secoes usam veus, gradientes e brilhos sutis para evitar cortes visuais chapados sem poluir a interface.
+- A Home prioriza narrativa consultiva: proposta clara no hero, formulario como analise personalizada, processo em 3 etapas e sinais de autoridade do fundador.
+- A pagina de Servicos e as paginas de seguros tambem seguem a abordagem consultiva, guiando o usuario por necessidade, analise e proximos passos.

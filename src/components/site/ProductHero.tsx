@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { resolveIcon } from "@/lib/icons";
 import { categoriaLabels, type Seguro } from "@/sanity/types";
 import { Reveal } from "./motion/Reveal";
@@ -41,6 +42,19 @@ export function ProductHero({ seguro }: { seguro: Seguro }) {
         </p>
         <h1 className="font-heading text-4xl font-semibold text-white md:text-5xl">{seguro.title}</h1>
         {seguro.resumo && <p className="mx-auto mt-4 max-w-2xl text-white/80">{seguro.resumo}</p>}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <Button asChild size="lg" className="bg-brand-blue hover:bg-brand-blue-dark">
+            <Link href="#cotacao">Solicitar análise</Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-white/40 bg-transparent text-white hover:bg-white/10"
+          >
+            <Link href="/servicos">Ver outras soluções</Link>
+          </Button>
+        </div>
       </Reveal>
     </section>
   );

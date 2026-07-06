@@ -15,20 +15,44 @@ import { getConfiguracoesGerais, getDepoimentos, getSeguros } from "@/sanity/lib
 
 const pilares = [
   {
-    titulo: "Você e sua família",
-    descricao: "A família é a nossa maior prioridade. Conte com um expert para cuidar do seu maior bem!",
+    titulo: "Proteger minha família",
+    descricao: "Soluções para preservar renda, sucessão e segurança das pessoas que dependem de você.",
   },
   {
-    titulo: "Sua empresa",
-    descricao: "O futuro da sua empresa é para ser perene! Não deixe esse legado depender da sorte, conte conosco para protegê-lo.",
+    titulo: "Blindar minha empresa",
+    descricao: "Estratégias para reduzir riscos, proteger sócios e manter a continuidade do negócio.",
   },
   {
-    titulo: "Sua carreira",
-    descricao: "Planos personalizados para garantir a proteção total da sua atividade profissional, seja qual for a sua área de atuação.",
+    titulo: "Garantir minha renda",
+    descricao: "Proteção para profissionais que precisam manter estabilidade mesmo diante de imprevistos.",
   },
   {
-    titulo: "Seu patrimônio",
-    descricao: "As suas conquistas não foram em vão. Proteja os seus bens com as melhores proteções e condições do mercado.",
+    titulo: "Preservar meu patrimônio",
+    descricao: "Coberturas e planejamento para proteger bens, conquistas e decisões financeiras importantes.",
+  },
+];
+
+const autoridadeVictor = [
+  { valor: "Desde 2014", rotulo: "atuando com proteção e planejamento" },
+  { valor: "Life Planner®", rotulo: "experiência em seguros de vida" },
+  { valor: "XP e Farol", rotulo: "vivência em investimentos" },
+];
+
+const processoConsultivo = [
+  {
+    etapa: "01",
+    titulo: "Entendimento do perfil",
+    descricao: "Mapeamos família, patrimônio, empresa, renda e prioridades antes de falar em produto.",
+  },
+  {
+    etapa: "02",
+    titulo: "Comparação das soluções",
+    descricao: "Buscamos alternativas aderentes ao seu momento, com clareza sobre cobertura e finalidade.",
+  },
+  {
+    etapa: "03",
+    titulo: "Acompanhamento contínuo",
+    descricao: "A proteção é revisada conforme sua vida muda, para não ficar antiga ou desalinhada.",
   },
 ];
 
@@ -74,8 +98,8 @@ export default async function HomePage() {
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mx-auto mt-5 max-w-xl text-lg text-white/90 drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)]">
-              Seu bem mais valioso, com o futuro protegido!
+            <p className="mx-auto mt-5 max-w-2xl text-lg text-white/90 drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)]">
+              Consultoria em seguros e planejamento financeiro para proteger família, patrimônio, empresa e futuro.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
@@ -93,7 +117,7 @@ export default async function HomePage() {
               {[
                 { valor: "Desde 2014", rotulo: "no mercado" },
                 { valor: `${seguros.length} tipos`, rotulo: "de seguro" },
-                { valor: "RJ + SP", rotulo: "atendimento presencial" },
+                { valor: "RJ + SP", rotulo: "atendimento consultivo" },
               ].map((item) => (
                 <div key={item.rotulo} className="text-center">
                   <p className="font-heading text-2xl font-semibold">{item.valor}</p>
@@ -138,6 +162,17 @@ export default async function HomePage() {
               que ele considera essenciais para construir relacionamentos duradouros e de confiança com seus
               clientes.
             </p>
+            <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {autoridadeVictor.map((item) => (
+                <div
+                  key={item.valor}
+                  className="rounded-xl border border-brand-navy/10 bg-white/80 p-4 shadow-sm shadow-brand-navy/5"
+                >
+                  <p className="font-heading text-xl font-semibold text-brand-navy">{item.valor}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{item.rotulo}</p>
+                </div>
+              ))}
+            </div>
             <h3 className="mt-6 font-semibold text-brand-navy">Experiência a Serviço do Cliente</h3>
             <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-muted-foreground">
               <li><strong className="text-brand-navy">Financial Advisor na Dominion Capital Strategies:</strong> gestão de investimentos internacionais e liderança de equipes em Londres.</li>
@@ -149,6 +184,39 @@ export default async function HomePage() {
           <Reveal delay={0.15} y={40} className="md:pl-6">
             <VictorPhotos />
           </Reveal>
+        </div>
+      </section>
+
+      {/* Processo consultivo */}
+      <section className="relative overflow-hidden bg-brand-soft/40 py-16 md:py-20">
+        <DotGrid id="dots-processo" className="text-brand-navy/[0.04]" />
+        <RadialGlow className="-right-16 top-8 size-72 bg-brand-blue/10" />
+        <div className="relative mx-auto max-w-7xl px-6">
+          <Reveal>
+            <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">
+              Como funciona
+            </p>
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <h2 className="max-w-2xl font-heading text-4xl font-semibold text-brand-navy">
+                Um processo simples para uma decisão importante.
+              </h2>
+              <p className="max-w-md text-sm text-muted-foreground">
+                A consultoria organiza riscos, objetivos e alternativas para que a escolha seja consciente, não
+                impulsiva.
+              </p>
+            </div>
+          </Reveal>
+          <StaggerGroup className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
+            {processoConsultivo.map((item) => (
+              <StaggerItem key={item.etapa}>
+                <div className="h-full rounded-xl border border-brand-navy/10 bg-white p-6 shadow-sm shadow-brand-navy/5">
+                  <p className="font-heading text-3xl font-semibold text-brand-blue">{item.etapa}</p>
+                  <h3 className="mt-5 font-semibold text-brand-navy">{item.titulo}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.descricao}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerGroup>
         </div>
       </section>
 
@@ -236,8 +304,11 @@ export default async function HomePage() {
         <Reveal>
           <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">Serviços</p>
           <h2 className="max-w-2xl font-heading text-4xl font-semibold text-brand-navy">
-            Somos especializados no que mais importa, a sua proteção!
+            Escolha pelo que você quer proteger.
           </h2>
+          <p className="mt-4 max-w-2xl text-muted-foreground">
+            Se você ainda não sabe qual seguro pedir, comece pela necessidade. A solução certa vem depois da análise.
+          </p>
         </Reveal>
         <StaggerGroup className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {pilares.map((pilar) => (
