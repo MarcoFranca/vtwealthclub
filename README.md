@@ -1,13 +1,13 @@
 # VT Wealth Club
 
-Site institucional da VT Wealth Club construído com Next.js, com conteúdo gerenciado por Sanity e envio de formulários via Resend.
+Site institucional da VT Wealth Club construído com Next.js, com conteúdo gerenciado por Sanity e envio de formulários via SMTP (e-mail hospedado no cPanel/RapidCloud).
 
 ## Visao geral
 
 - Frontend em Next.js App Router.
 - Conteudo principal vindo do Sanity.
 - Fallback local para o site continuar funcionando mesmo sem credenciais do Sanity.
-- Formularios de contato e cotacao enviados por e-mail com Resend.
+- Formularios de contato e cotacao enviados por e-mail via SMTP (nodemailer).
 - Sanity Studio embutido no projeto em `/studio`.
 
 ## Stack principal
@@ -18,7 +18,7 @@ Site institucional da VT Wealth Club construído com Next.js, com conteúdo gere
 - Tailwind CSS 4
 - Sanity
 - next-sanity
-- Resend
+- nodemailer
 - Zod
 
 ## Rotas principais
@@ -60,13 +60,18 @@ pnpm studio
 
 Se `NEXT_PUBLIC_SANITY_PROJECT_ID` nao estiver definido, o projeto usa conteudo local em `src/sanity/data`.
 
-### Resend
+### SMTP
 
-- `RESEND_API_KEY`
-- `RESEND_TO_EMAIL`
-- `RESEND_FROM_EMAIL` opcional
+- `SMTP_HOST`
+- `SMTP_PORT` (465 = SSL implicito, 587 = STARTTLS)
+- `SMTP_USER`
+- `SMTP_PASSWORD`
+- `SMTP_FROM_EMAIL` opcional (usa `SMTP_USER` por padrao)
+- `SMTP_TO_EMAIL` opcional (usa `SMTP_USER` por padrao)
 
-Sem `RESEND_API_KEY`, os endpoints dos formularios falham de forma controlada e retornam erro amigavel.
+Use a conta de e-mail ja hospedada no cPanel/RapidCloud (cPanel > Email Accounts > [conta] > Connect Devices mostra host/porta/usuario).
+
+Sem `SMTP_HOST` + `SMTP_USER` + `SMTP_PASSWORD`, os endpoints dos formularios falham de forma controlada e retornam erro amigavel.
 
 ## Sanity no projeto
 
@@ -99,6 +104,14 @@ Depois de deploy na Vercel, o acesso esperado e:
 - `configuracoesGerais`
 - `post`
 
+Campos institucionais em `configuracoesGerais`:
+
+- razão social
+- CNPJ
+- inscrição municipal
+- código SUSEP PJ
+- endereços, telefone, WhatsApp, e-mail e redes sociais
+
 Indice dos schemas:
 
 - [src/sanity/schemaTypes/index.ts](E:/Autentika/Projetos/Programas/vtwealthclub/src/sanity/schemaTypes/index.ts:1)
@@ -118,13 +131,13 @@ Isso evita quebrar o site durante setup inicial, manutencao ou desenvolvimento s
 
 ## Formularios e e-mail
 
-Os formularios enviam dados para rotas internas que validam o payload com Zod e disparam e-mail com Resend.
+Os formularios enviam dados para rotas internas que validam o payload com Zod e disparam e-mail via SMTP (nodemailer), usando a conta de e-mail do dominio hospedada no cPanel/RapidCloud.
 
 Arquivos principais:
 
 - [src/app/api/contato/route.ts](E:/Autentika/Projetos/Programas/vtwealthclub/src/app/api/contato/route.ts:1)
 - [src/app/api/cotacao/route.ts](E:/Autentika/Projetos/Programas/vtwealthclub/src/app/api/cotacao/route.ts:1)
-- [src/lib/resend.ts](E:/Autentika/Projetos/Programas/vtwealthclub/src/lib/resend.ts:1)
+- [src/lib/mailer.ts](E:/Autentika/Projetos/Programas/vtwealthclub/src/lib/mailer.ts:1)
 
 ## Estrutura resumida
 
@@ -187,3 +200,4 @@ pnpm seed
 - As transicoes entre secoes usam veus, gradientes e brilhos sutis para evitar cortes visuais chapados sem poluir a interface.
 - A Home prioriza narrativa consultiva: proposta clara no hero, formulario como analise personalizada, processo em 3 etapas e sinais de autoridade do fundador.
 - A pagina de Servicos e as paginas de seguros tambem seguem a abordagem consultiva, guiando o usuario por necessidade, analise e proximos passos.
+- Os dados institucionais oficiais ficam em `src/sanity/data/configuracoesGerais.ts` como fallback local e tambem podem ser editados no Sanity em `configuracoesGerais`.
