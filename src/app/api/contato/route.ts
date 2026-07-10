@@ -3,6 +3,10 @@ import { z } from "zod";
 
 import { sendNotificationEmail } from "@/lib/mailer";
 
+// nodemailer precisa do runtime Node (não Edge) e de mais tempo para o SMTP.
+export const runtime = "nodejs";
+export const maxDuration = 30;
+
 const contatoSchema = z.object({
   nome: z.string().min(1),
   email: z.string().email(),

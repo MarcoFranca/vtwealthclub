@@ -13,6 +13,12 @@ const transporter = isMailerConfigured
       port,
       secure: port === 465, // 465 = SSL implícito; 587 = STARTTLS
       auth: { user, pass },
+      // Timeouts explícitos: o SMTP do cPanel pode demorar alguns segundos na
+      // conexão/handshake. Sem isso, a função podia estourar o limite do Vercel
+      // (e mostrar erro no site mesmo com o e-mail já entregue).
+      connectionTimeout: 20000,
+      greetingTimeout: 15000,
+      socketTimeout: 25000,
     })
   : null;
 
