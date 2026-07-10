@@ -36,6 +36,8 @@ export const configuracoesGerais = defineType({
     }),
     defineField({ name: "razaoSocial", title: "Razão social", type: "string" }),
     defineField({ name: "cnpj", title: "CNPJ", type: "string" }),
+    defineField({ name: "inscricaoMunicipal", title: "Inscrição municipal", type: "string" }),
+    defineField({ name: "susepPj", title: "Código SUSEP PJ", type: "string" }),
   ],
   preview: {
     prepare() {

@@ -8,14 +8,12 @@ import { getConfiguracoesGerais } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Contato | VT Wealth Club",
-  description: "Fale com a VT Wealth Club por telefone, WhatsApp, e-mail ou visite um dos nossos escritórios.",
+  description: "Fale com a VT Wealth Club por telefone, WhatsApp, e-mail ou visite nossa sede.",
 };
 
 export default async function ContatoPage() {
   const config = await getConfiguracoesGerais();
-  const enderecoVisita =
-    config.enderecos?.find((endereco) => endereco.nome?.includes("Faria Lima")) ??
-    config.enderecos?.[0];
+  const enderecoVisita = config.enderecos?.find((endereco) => endereco.principal) ?? config.enderecos?.[0];
 
   const mapsSrc = enderecoVisita
     ? `https://www.google.com/maps?q=${encodeURIComponent(enderecoVisita.endereco)}&output=embed`
@@ -55,7 +53,7 @@ export default async function ContatoPage() {
               <div>
                 <h3 className="mb-2 font-semibold text-brand-navy">Faça uma visita</h3>
                 <p className="mb-2 text-sm text-muted-foreground">
-                  Receba a equipe da VT Wealth Club com hora marcada em um dos nossos escritórios.
+                  Receba a equipe da VT Wealth Club com hora marcada em nossa sede.
                 </p>
                 <p className="flex items-start gap-2 text-sm text-brand-blue">
                   <MapPin className="mt-0.5 size-4 shrink-0" />

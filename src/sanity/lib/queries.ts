@@ -57,5 +57,15 @@ export async function getConfiguracoesGerais(): Promise<ConfiguracoesGerais> {
   const remote = await client!.fetch<ConfiguracoesGerais | null>(
     `*[_type == "configuracoesGerais"][0]`
   );
-  return remote ?? configuracoesGeraisLocais;
+  return remote
+    ? {
+        ...configuracoesGeraisLocais,
+        ...remote,
+        redesSociais: {
+          ...configuracoesGeraisLocais.redesSociais,
+          ...remote.redesSociais,
+        },
+        enderecos: remote.enderecos?.length ? remote.enderecos : configuracoesGeraisLocais.enderecos,
+      }
+    : configuracoesGeraisLocais;
 }

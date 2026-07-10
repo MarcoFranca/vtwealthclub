@@ -7,23 +7,17 @@ export const configuracoesGeraisLocais: ConfiguracoesGerais = {
   enderecos: [
     {
       nome: "Sede Niterói",
-      endereco: "Rua Maestro Felício Toledo, 495 – Sala 1102 – Centro, Niterói – RJ, 24030-105",
+      endereco: "Rua Maestro Felicio Toledo, 495, Sala 1102, Centro, Niterói, RJ, CEP: 24030-105",
       principal: true,
-    },
-    {
-      nome: "Botafogo, RJ",
-      endereco: "Praia de Botafogo, 300 – 11º Andar – Botafogo, Rio de Janeiro – RJ, 22250-040",
-    },
-    {
-      nome: "Faria Lima, SP",
-      endereco: "Av. Brigadeiro Faria Lima, 1572 – Conj. 1208 – Jardim Paulista, São Paulo – SP, 01451-001",
     },
   ],
   redesSociais: {
     facebook: "",
-    linkedin: "",
-    instagram: "",
+    linkedin: "https://www.linkedin.com/in/victortarouquella/",
+    instagram: "https://www.instagram.com/vtwealthclub/",
   },
-  razaoSocial: "VT Wealth Club Ltda",
+  razaoSocial: "VT WEALTH CLUB LTDA",
   cnpj: "32.484.352/0001-56",
+  inscricaoMunicipal: "3025393",
+  susepPj: "202034545",
 };

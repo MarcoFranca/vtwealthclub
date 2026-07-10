@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-import { sendNotificationEmail } from "@/lib/resend";
+import { sendNotificationEmail } from "@/lib/mailer";
 
 const contatoSchema = z.object({
   nome: z.string().min(1),
