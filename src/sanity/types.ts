@@ -50,6 +50,8 @@ export interface ConfiguracoesGerais {
   redesSociais?: { facebook?: string; linkedin?: string; instagram?: string };
   razaoSocial?: string;
   cnpj?: string;
+  inscricaoMunicipal?: string;
+  susepPj?: string;
 }
 
 export const categoriaLabels: Record<Categoria, string> = {

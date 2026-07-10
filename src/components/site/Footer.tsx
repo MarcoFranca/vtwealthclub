@@ -98,6 +98,8 @@ export function Footer({
           <div className="space-y-1 text-center md:text-left">
             {config.razaoSocial && <p>Razão Social: {config.razaoSocial}</p>}
             {config.cnpj && <p>CNPJ: {config.cnpj}</p>}
+            {config.inscricaoMunicipal && <p>IM: {config.inscricaoMunicipal}</p>}
+            {config.susepPj && <p>Código SUSEP PJ: {config.susepPj}</p>}
             {enderecoPrincipal && <p>Endereço: {enderecoPrincipal.endereco}</p>}
             <p className="pt-1 text-white/45">
               Desenvolvido por{" "}
