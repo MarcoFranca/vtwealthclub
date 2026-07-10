@@ -33,6 +33,7 @@ Site institucional da VT Wealth Club construído com Next.js, com conteúdo gere
 
 - `POST /api/contato` envia mensagem do formulario de contato
 - `POST /api/cotacao` envia pedido de cotacao
+- As APIs tratam timeouts ambíguos do SMTP como recebidos (`202`) para evitar feedback falso de erro quando o e-mail foi entregue.
 
 ## Como rodar localmente
 

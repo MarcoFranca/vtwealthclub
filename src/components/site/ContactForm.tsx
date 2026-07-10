@@ -10,12 +10,16 @@ import { Textarea } from "@/components/ui/textarea";
 
 export function ContactForm() {
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (loading || submitted) return;
+
+    const form = event.currentTarget;
     setLoading(true);
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     const payload = {
       nome: formData.get("nome"),
       whatsapp: formData.get("whatsapp"),
@@ -29,9 +33,13 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error("Falha ao enviar");
+      const data = await res.json().catch(() => null);
+      if (!res.ok || data?.ok === false) {
+        throw new Error(data?.error || "Falha ao enviar");
+      }
       toast.success("Mensagem enviada! Retornaremos em breve.");
-      event.currentTarget.reset();
+      setSubmitted(true);
+      form.reset();
     } catch {
       toast.error("Não foi possível enviar agora. Tente novamente ou fale pelo WhatsApp.");
     } finally {
@@ -59,8 +67,8 @@ export function ContactForm() {
         <Label htmlFor="mensagem">Mensagem</Label>
         <Textarea id="mensagem" name="mensagem" rows={5} placeholder="Como podemos ajudar?" required />
       </div>
-      <Button type="submit" disabled={loading} className="bg-brand-blue hover:bg-brand-blue-dark">
-        {loading ? "Enviando..." : "Envie a sua mensagem"}
+      <Button type="submit" disabled={loading || submitted} className="bg-brand-blue hover:bg-brand-blue-dark">
+        {loading ? "Enviando..." : submitted ? "Mensagem enviada" : "Envie a sua mensagem"}
       </Button>
     </form>
   );

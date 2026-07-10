@@ -11,12 +11,16 @@ import type { Seguro } from "@/sanity/types";
 
 export function QuoteForm({ seguros, defaultServico }: { seguros: Seguro[]; defaultServico?: string }) {
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (loading || submitted) return;
+
+    const form = event.currentTarget;
     setLoading(true);
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     const payload = {
       nome: formData.get("nome"),
       email: formData.get("email"),
@@ -31,9 +35,13 @@ export function QuoteForm({ seguros, defaultServico }: { seguros: Seguro[]; defa
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error("Falha ao enviar");
+      const data = await res.json().catch(() => null);
+      if (!res.ok || data?.ok === false) {
+        throw new Error(data?.error || "Falha ao enviar");
+      }
       toast.success("Cotação enviada! Entraremos em contato em breve.");
-      event.currentTarget.reset();
+      setSubmitted(true);
+      form.reset();
     } catch {
       toast.error("Não foi possível enviar agora. Tente novamente ou fale pelo WhatsApp.");
     } finally {
@@ -71,8 +79,12 @@ export function QuoteForm({ seguros, defaultServico }: { seguros: Seguro[]; defa
         <Input id="codigoPostal" name="codigoPostal" placeholder="22222-222" />
       </div>
       <div className="md:col-span-3">
-        <Button type="submit" disabled={loading} className="w-full bg-brand-blue hover:bg-brand-blue-dark md:w-auto">
-          {loading ? "Enviando..." : "Enviar"}
+        <Button
+          type="submit"
+          disabled={loading || submitted}
+          className="w-full bg-brand-blue hover:bg-brand-blue-dark md:w-auto"
+        >
+          {loading ? "Enviando..." : submitted ? "Cotação enviada" : "Enviar"}
         </Button>
       </div>
     </form>
