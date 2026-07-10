@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-import { sendNotificationEmail } from "@/lib/mailer";
+import { isAmbiguousEmailDeliveryError, sendNotificationEmail } from "@/lib/mailer";
 
 // nodemailer precisa do runtime Node (não Edge) e de mais tempo para o SMTP.
 export const runtime = "nodejs";
@@ -40,6 +40,17 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Erro ao enviar e-mail de cotação:", error);
+
+    if (isAmbiguousEmailDeliveryError(error)) {
+      return NextResponse.json(
+        {
+          ok: true,
+          warning: "Cotação recebida, mas a confirmação do servidor de e-mail demorou mais que o esperado.",
+        },
+        { status: 202 }
+      );
+    }
+
     return NextResponse.json(
       { error: "Não foi possível enviar a cotação agora." },
       { status: 502 }

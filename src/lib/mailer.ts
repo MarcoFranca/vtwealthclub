@@ -48,3 +48,18 @@ export async function sendNotificationEmail({
     replyTo,
   });
 }
+
+export function isAmbiguousEmailDeliveryError(error: unknown) {
+  if (!(error instanceof Error)) return false;
+
+  const code = "code" in error ? String(error.code) : "";
+  const message = error.message.toLowerCase();
+
+  return (
+    ["ECONNECTION", "ESOCKET", "ETIMEDOUT"].includes(code) ||
+    message.includes("timeout") ||
+    message.includes("timed out") ||
+    message.includes("socket") ||
+    message.includes("connection closed")
+  );
+}
