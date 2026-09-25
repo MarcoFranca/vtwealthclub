@@ -1,42 +1,48 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 import { resolveIcon } from "@/lib/icons";
+import { urlForImage } from "@/sanity/lib/image";
 import type { Seguro } from "@/sanity/types";
 
+/**
+ * Card de seguro no estilo clean/domaco: foto grande de estilo de vida como
+ * fundo, ícone em círculo branco no topo, nome sobreposto e "Saiba mais".
+ * Sem foto (heroImage), usa um fundo em gradiente da marca com o ícone.
+ */
 export function InsuranceCard({ seguro }: { seguro: Seguro }) {
   const Icon = resolveIcon(seguro.beneficios?.[0]?.icone);
+  const foto = urlForImage(seguro.heroImage)?.width(640).height(800).url();
 
   return (
     <Link
       href={`/seguros/${seguro.slug}`}
-      className="group relative flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-foreground/10 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:ring-brand-blue/30"
+      className="group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-3xl bg-brand-navy"
     >
-      {/* Capa com ícone */}
-      <div className="relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br from-brand-navy to-brand-blue">
-        {/* Padrão decorativo */}
-        <svg
-          className="absolute inset-0 h-full w-full opacity-20"
-          viewBox="0 0 200 140"
-          fill="none"
-          preserveAspectRatio="xMidYMid slice"
-          aria-hidden="true"
-        >
-          {Array.from({ length: 6 }).map((_, i) => (
-            <circle key={i} cx={200 - i * 22} cy={i * 18} r={60 - i * 6} stroke="white" strokeWidth="0.7" />
-          ))}
-        </svg>
-        <div className="relative flex size-16 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
-          {/* eslint-disable-next-line react-hooks/static-components -- Icon vem de uma lookup table estática (resolveIcon), não é um componente novo por render */}
-          <Icon className="size-8 text-white" />
-        </div>
+      {foto ? (
+        <Image
+          src={foto}
+          alt={seguro.title}
+          fill
+          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy-light to-brand-blue" />
+      )}
+      {/* Overlay para leitura do texto */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/10" />
+
+      {/* Ícone em círculo no topo */}
+      <div className="absolute left-5 top-5 flex size-12 items-center justify-center rounded-full bg-white shadow-lg">
+        <Icon className="size-6 text-brand-blue" />
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 p-5">
-        <h3 className="font-heading text-lg font-semibold text-brand-navy">{seguro.title}</h3>
-        {seguro.resumo && <p className="line-clamp-2 text-sm text-muted-foreground">{seguro.resumo}</p>}
-        <span className="mt-auto flex items-center gap-1.5 pt-2 text-sm font-semibold text-brand-blue">
-          Ver detalhes
+      <div className="relative p-6">
+        <h3 className="font-heading text-xl font-bold leading-tight text-white">{seguro.title}</h3>
+        <span className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 group-hover:gap-2.5">
+          Saiba mais
           <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
         </span>
       </div>

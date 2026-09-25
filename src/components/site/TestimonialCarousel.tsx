@@ -7,7 +7,13 @@ import { Quote, UserRound, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Depoimento } from "@/sanity/types";
 
-export function TestimonialCarousel({ depoimentos }: { depoimentos: Depoimento[] }) {
+export function TestimonialCarousel({
+  depoimentos,
+  onDark = true,
+}: {
+  depoimentos: Depoimento[];
+  onDark?: boolean;
+}) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
 
@@ -77,7 +83,9 @@ export function TestimonialCarousel({ depoimentos }: { depoimentos: Depoimento[]
                 aria-label={`Ir para depoimento ${i + 1}`}
                 className={cn(
                   "h-2 rounded-full transition-all",
-                  i === index ? "w-6 bg-white" : "w-2 bg-white/40 hover:bg-white/60"
+                  i === index
+                    ? cn("w-6", onDark ? "bg-white" : "bg-brand-blue")
+                    : cn("w-2", onDark ? "bg-white/40 hover:bg-white/60" : "bg-brand-navy/20 hover:bg-brand-navy/40")
                 )}
               />
             ))}
@@ -86,14 +94,24 @@ export function TestimonialCarousel({ depoimentos }: { depoimentos: Depoimento[]
             <button
               onClick={() => goTo(index - 1)}
               aria-label="Anterior"
-              className="flex size-9 items-center justify-center rounded-full border border-white/30 text-white transition-colors hover:bg-white/10"
+              className={cn(
+                "flex size-9 items-center justify-center rounded-full border transition-colors",
+                onDark
+                  ? "border-white/30 text-white hover:bg-white/10"
+                  : "border-brand-navy/20 text-brand-navy hover:bg-brand-navy/5"
+              )}
             >
               <ChevronLeft className="size-4" />
             </button>
             <button
               onClick={() => goTo(index + 1)}
               aria-label="Próximo"
-              className="flex size-9 items-center justify-center rounded-full border border-white/30 text-white transition-colors hover:bg-white/10"
+              className={cn(
+                "flex size-9 items-center justify-center rounded-full border transition-colors",
+                onDark
+                  ? "border-white/30 text-white hover:bg-white/10"
+                  : "border-brand-navy/20 text-brand-navy hover:bg-brand-navy/5"
+              )}
             >
               <ChevronRight className="size-4" />
             </button>
