@@ -151,7 +151,7 @@ export function Header({
                 </a>
               )}
             </div>
-            <Button asChild size="lg" className="bg-brand-blue hover:bg-brand-blue-dark">
+            <Button asChild size="lg" className="rounded-full bg-brand-blue px-5 hover:bg-brand-blue-dark">
               <Link href="/contato">Peça sua cotação</Link>
             </Button>
           </div>
@@ -189,7 +189,7 @@ export function Header({
               <Link href="/contato" className="font-medium text-white" onClick={() => setMobileOpen(false)}>
                 Contato
               </Link>
-              <Button asChild className="mt-2 bg-brand-blue hover:bg-brand-blue-dark">
+              <Button asChild className="mt-2 rounded-full bg-brand-blue hover:bg-brand-blue-dark">
                 <Link href="/contato">Peça sua cotação</Link>
               </Button>
             </nav>

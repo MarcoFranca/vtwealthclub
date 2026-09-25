@@ -8,7 +8,7 @@ import { ProductHero } from "@/components/site/ProductHero";
 import { BenefitGrid } from "@/components/site/BenefitGrid";
 import { QuoteBlock } from "@/components/site/QuoteBlock";
 import { InsuranceCard } from "@/components/site/InsuranceCard";
-import { DotGrid, RadialGlow } from "@/components/site/Decor";
+import { SectionHeading } from "@/components/site/SectionHeading";
 import { Reveal } from "@/components/site/motion/Reveal";
 import { getConfiguracoesGerais, getSeguroBySlug, getSeguros } from "@/sanity/lib/queries";
 
@@ -18,21 +18,9 @@ export async function generateStaticParams() {
 }
 
 const etapasAnalise = [
-  {
-    titulo: "Entender seu perfil",
-    descricao: "Antes da proposta, avaliamos renda, patrimônio, dependentes, empresa e prioridades.",
-    icon: MessageCircle,
-  },
-  {
-    titulo: "Ajustar cobertura e custo",
-    descricao: "A recomendação considera proteção real, orçamento, carências, limites e finalidade do seguro.",
-    icon: ClipboardCheck,
-  },
-  {
-    titulo: "Acompanhar a decisão",
-    descricao: "Depois da contratação, a proteção pode ser revisada conforme sua vida ou negócio evolui.",
-    icon: ShieldCheck,
-  },
+  { titulo: "Entender seu perfil", descricao: "Antes da proposta, avaliamos renda, patrimônio, dependentes, empresa e prioridades.", icon: MessageCircle },
+  { titulo: "Ajustar cobertura e custo", descricao: "A recomendação considera proteção real, orçamento, carências, limites e finalidade do seguro.", icon: ClipboardCheck },
+  { titulo: "Acompanhar a decisão", descricao: "Depois da contratação, a proteção pode ser revisada conforme sua vida ou negócio evolui.", icon: ShieldCheck },
 ];
 
 export async function generateMetadata({
@@ -43,18 +31,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const seguro = await getSeguroBySlug(slug);
   if (!seguro) return {};
-
   return {
     title: seguro.seo?.title || `${seguro.title} | VT Wealth Club`,
     description: seguro.seo?.description || seguro.resumo,
   };
 }
 
-export default async function SeguroPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function SeguroPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const [seguro, seguros, config] = await Promise.all([
     getSeguroBySlug(slug),
@@ -74,29 +57,21 @@ export default async function SeguroPage({
 
       {/* Descrição */}
       {!!seguro.descricao?.length && (
-        <section className="relative overflow-hidden bg-white py-16 md:py-20">
-          <RadialGlow className="-left-20 top-10 size-72 bg-brand-blue/10" />
-          <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(320px,0.55fr)]">
+        <section className="bg-white py-16 md:py-20">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(320px,0.55fr)]">
             <Reveal>
-              <div>
-                <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">
-                  Análise do produto
-                </p>
-                <h2 className="font-heading text-3xl font-semibold text-brand-navy">
-                  Para que serve o {seguro.title}
-                </h2>
-                <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted-foreground">
-                  {seguro.descricao.map((paragrafo, index) => (
-                    <p key={index} className={index === 0 ? "text-xl font-medium text-brand-navy" : undefined}>
-                      {paragrafo}
-                    </p>
-                  ))}
-                </div>
+              <SectionHeading kicker="Análise do produto" title={`Para que serve o ${seguro.title}`} />
+              <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted-foreground">
+                {seguro.descricao.map((paragrafo, index) => (
+                  <p key={index} className={index === 0 ? "text-xl font-medium text-brand-navy" : undefined}>
+                    {paragrafo}
+                  </p>
+                ))}
               </div>
             </Reveal>
             <Reveal delay={0.1} y={30}>
-              <aside className="rounded-2xl border border-brand-navy/10 bg-brand-soft/50 p-6 shadow-sm shadow-brand-navy/5">
-                <p className="font-heading text-2xl font-semibold text-brand-navy">
+              <aside className="rounded-3xl border border-brand-navy/10 bg-brand-surface p-6">
+                <p className="font-heading text-xl font-bold text-brand-navy">
                   Este seguro faz mais sentido quando você busca:
                 </p>
                 <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
@@ -117,27 +92,26 @@ export default async function SeguroPage({
         </section>
       )}
 
-      <section className="relative overflow-hidden bg-brand-soft/40 py-16 md:py-20">
-        <DotGrid id={`dots-analise-${seguro.slug}`} className="text-brand-navy/[0.04]" />
-        <div className="relative mx-auto max-w-7xl px-6">
+      {/* Processo */}
+      <section className="bg-brand-surface py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-6">
           <Reveal>
-            <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">
-              Consultoria
-            </p>
-            <h2 className="max-w-2xl font-heading text-3xl font-semibold text-brand-navy">
-              A contratação passa por uma análise, não por uma escolha no escuro.
-            </h2>
+            <SectionHeading
+              kicker="Consultoria"
+              title="A contratação passa por uma análise,"
+              muted="não por uma escolha no escuro."
+            />
           </Reveal>
           <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
             {etapasAnalise.map((item) => {
               const Icon = item.icon;
               return (
                 <Reveal key={item.titulo} y={24}>
-                  <div className="h-full rounded-xl border border-brand-navy/10 bg-white p-6 shadow-sm shadow-brand-navy/5">
-                    <div className="mb-5 flex size-12 items-center justify-center rounded-xl bg-brand-blue text-white">
+                  <div className="h-full rounded-2xl border border-brand-navy/10 bg-white p-6">
+                    <div className="mb-5 flex size-12 items-center justify-center rounded-full bg-brand-blue text-white">
                       <Icon className="size-6" />
                     </div>
-                    <h3 className="font-semibold text-brand-navy">{item.titulo}</h3>
+                    <h3 className="font-heading text-lg font-bold text-brand-navy">{item.titulo}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.descricao}</p>
                   </div>
                 </Reveal>
@@ -149,57 +123,50 @@ export default async function SeguroPage({
 
       {/* Benefícios */}
       {!!seguro.beneficios?.length && (
-        <section className="relative overflow-hidden bg-gradient-to-b from-white via-brand-soft/20 to-white py-16 md:py-20">
-          <DotGrid id={`dots-beneficios-${seguro.slug}`} className="text-brand-navy/[0.04]" />
-          <div className="relative mx-auto max-w-7xl px-6">
+        <section className="bg-white py-16 md:py-20">
+          <div className="mx-auto max-w-7xl px-6">
             <Reveal>
-              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">Por que contratar</p>
-              <h2 className="mb-4 max-w-2xl font-heading text-3xl font-semibold text-brand-navy">
-                O que esta solução pode proteger na prática
-              </h2>
-              <p className="mb-10 max-w-2xl text-muted-foreground">
-                Os benefícios variam conforme perfil e seguradora, mas estes pontos ajudam a entender o papel deste
-                seguro dentro de uma estratégia de proteção.
-              </p>
+              <SectionHeading
+                kicker="Por que contratar"
+                title="O que esta solução"
+                muted="pode proteger na prática."
+                description="Os benefícios variam conforme perfil e seguradora, mas estes pontos ajudam a entender o papel deste seguro dentro de uma estratégia de proteção."
+              />
             </Reveal>
-            <BenefitGrid beneficios={seguro.beneficios} />
+            <div className="mt-10">
+              <BenefitGrid beneficios={seguro.beneficios} />
+            </div>
           </div>
         </section>
       )}
 
       {/* Cotação */}
-      <section id="cotacao" className="relative overflow-hidden py-16 md:py-20">
-        <RadialGlow className="right-[-5rem] top-10 size-80 bg-brand-soft/80" />
-        <Reveal className="relative">
+      <section id="cotacao" className="bg-brand-surface py-16 md:py-20">
+        <Reveal>
           <QuoteBlock seguros={seguros} config={config} defaultServico={seguro.title} />
         </Reveal>
       </section>
 
-      {/* Seguros relacionados */}
+      {/* Relacionados */}
       {relacionados.length > 0 && (
-        <section className="mx-auto max-w-7xl px-6 pb-20">
-          <Reveal>
-            <div className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-brand-navy/10 pb-5">
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">
-                  Próximas possibilidades
-                </p>
-                <h2 className="font-heading text-2xl font-semibold text-brand-navy">
-                  Coberturas que podem complementar sua estratégia
-                </h2>
+        <section className="bg-white py-16 md:py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <Reveal>
+              <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+                <SectionHeading kicker="Próximas possibilidades" title="Coberturas que podem complementar" muted="a sua estratégia." />
+                <Button asChild variant="ghost" className="rounded-full text-brand-blue hover:text-brand-blue-dark">
+                  <Link href="/servicos">
+                    Ver todos os seguros
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
               </div>
-              <Button asChild variant="ghost" className="text-brand-blue hover:text-brand-blue-dark">
-                <Link href="/servicos">
-                  Ver todos os seguros
-                  <ArrowRight className="size-4" />
-                </Link>
-              </Button>
+            </Reveal>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {relacionados.map((s) => (
+                <InsuranceCard key={s._id} seguro={s} />
+              ))}
             </div>
-          </Reveal>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {relacionados.map((s) => (
-              <InsuranceCard key={s._id} seguro={s} />
-            ))}
           </div>
         </section>
       )}

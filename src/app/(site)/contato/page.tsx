@@ -21,12 +21,16 @@ export default async function ContatoPage() {
 
   return (
     <>
-      <PageHero title="Contato" />
+      <PageHero
+        title="Vamos conversar sobre a sua proteção"
+        subtitle="Fale com a nossa equipe por telefone, WhatsApp ou e-mail. Respondemos rapidamente para ajudar você a encontrar a melhor solução."
+      />
 
-      <section className="mx-auto max-w-7xl px-6 py-16">
+      <section className="bg-white py-16 md:py-20">
+       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
           <div>
-            <h2 className="mb-1 text-2xl font-bold text-brand-navy">Envie Uma Mensagem</h2>
+            <h2 className="mb-1 font-heading text-2xl font-bold text-brand-navy">Envie uma mensagem</h2>
             <p className="mb-6 text-muted-foreground">
               Preencha o formulário abaixo com os seus dados e conte um pouco sobre o que você precisa. Nossa
               equipe entra em contato em até 1 dia útil.
@@ -34,7 +38,7 @@ export default async function ContatoPage() {
             <ContactForm />
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6 rounded-3xl bg-brand-surface p-7">
             <div>
               <h3 className="mb-2 font-semibold text-brand-navy">Entre em Contato</h3>
               <p className="mb-2 text-sm text-muted-foreground">
@@ -69,7 +73,7 @@ export default async function ContatoPage() {
                   Prefere conversar agora? Fale com a gente pelo WhatsApp e receba atendimento rápido com um de
                   nossos corretores.
                 </p>
-                <Button asChild className="bg-brand-blue hover:bg-brand-blue-dark">
+                <Button asChild className="rounded-full bg-brand-blue px-5 hover:bg-brand-blue-dark">
                   <a href={`https://wa.me/${config.whatsapp}`} target="_blank" rel="noreferrer">
                     <MessageCircle className="size-4" />
                     Abrir WhatsApp
@@ -81,7 +85,7 @@ export default async function ContatoPage() {
         </div>
 
         {mapsSrc && (
-          <div className="mt-16 overflow-hidden rounded-2xl ring-1 ring-foreground/10">
+          <div className="mt-16 overflow-hidden rounded-3xl ring-1 ring-foreground/10">
             <iframe
               src={mapsSrc}
               width="100%"
@@ -93,6 +97,7 @@ export default async function ContatoPage() {
             />
           </div>
         )}
+       </div>
       </section>
     </>
   );
