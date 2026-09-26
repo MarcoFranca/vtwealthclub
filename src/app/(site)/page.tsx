@@ -98,9 +98,19 @@ export default async function HomePage() {
                   className="object-cover object-top"
                 />
               </div>
-              <div className="flex aspect-square flex-col justify-center rounded-3xl bg-brand-blue p-5 text-white">
-                <p className="font-heading text-3xl font-bold">10 anos</p>
-                <p className="mt-1 text-sm text-white/80">protegendo famílias e negócios</p>
+              <div className="relative flex aspect-square flex-col justify-end overflow-hidden rounded-3xl p-5 text-white">
+                <Image
+                  src="/photos/hero-familia-hd.jpg"
+                  alt="Clientes protegidos pela VT Wealth Club"
+                  fill
+                  sizes="(min-width: 768px) 22vw, 45vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-blue via-brand-blue/70 to-brand-blue/30" />
+                <div className="relative">
+                  <p className="font-heading text-3xl font-bold">10 anos</p>
+                  <p className="mt-1 text-sm text-white/85">protegendo famílias e negócios</p>
+                </div>
               </div>
             </div>
           </Reveal>
