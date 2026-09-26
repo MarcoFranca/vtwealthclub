@@ -8,20 +8,21 @@ export type LogoSeguradora = { nome: string; logoUrl?: string };
  * Esteira de seguradoras "passando" (marquee). Recebe a lista de parceiros;
  * se houver logo, mostra a imagem em tom neutro, senão o nome em texto.
  *
- * Observação: a lista abaixo é um PLACEHOLDER para pré-visualização. As
- * seguradoras reais com que a VT Wealth Club trabalha devem ser confirmadas
- * pelo cliente e cadastradas no Sanity (tipo "parceiro", com logo).
+ * Observação: a lista abaixo é um RASCUNHO para pré-visualização, a ser
+ * revisado com o cliente. As seguradoras reais devem ser confirmadas e
+ * cadastradas no Sanity (tipo "parceiro", com logo). SulAmérica e Icatu
+ * ainda sem arquivo de logo — exibidas como texto até chegar a arte.
  */
 const PLACEHOLDER: LogoSeguradora[] = [
-  { nome: "Prudential" },
-  { nome: "Porto Seguro" },
-  { nome: "Bradesco Seguros" },
+  { nome: "Prudential", logoUrl: "/logos/seguradoras/prudential.svg" },
+  { nome: "Porto Seguro", logoUrl: "/logos/seguradoras/porto-seguro.svg" },
+  { nome: "Bradesco Seguros", logoUrl: "/logos/seguradoras/bradesco-seguros.svg" },
   { nome: "SulAmérica" },
-  { nome: "Allianz" },
-  { nome: "MAPFRE" },
-  { nome: "Tokio Marine" },
-  { nome: "HDI Seguros" },
-  { nome: "Azul Seguros" },
+  { nome: "Allianz", logoUrl: "/logos/seguradoras/allianz.svg" },
+  { nome: "MAPFRE", logoUrl: "/logos/seguradoras/mapfre.svg" },
+  { nome: "Tokio Marine", logoUrl: "/logos/seguradoras/tokio-marine.svg" },
+  { nome: "HDI Seguros", logoUrl: "/logos/seguradoras/hdi-seguros.svg" },
+  { nome: "Azul Seguros", logoUrl: "/logos/seguradoras/azul-seguros.svg" },
   { nome: "Icatu" },
 ];
 
