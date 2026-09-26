@@ -1,16 +1,34 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { resolveIcon } from "@/lib/icons";
+import { fotoLocalSeguro } from "@/lib/seguroImages";
+import { urlForImage } from "@/sanity/lib/image";
 import { categoriaLabels, type Seguro } from "@/sanity/types";
 import { Reveal } from "./motion/Reveal";
 
 export function ProductHero({ seguro }: { seguro: Seguro }) {
   const Icon = resolveIcon(seguro.beneficios?.[0]?.icone);
+  const foto =
+    urlForImage(seguro.heroImage)?.width(1600).height(900).url() ?? fotoLocalSeguro(seguro.slug);
 
   return (
     <section className="relative overflow-hidden bg-brand-navy pb-16 pt-14 md:pb-20 md:pt-16">
+      {foto && (
+        <>
+          <Image
+            src={foto}
+            alt={seguro.title}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center opacity-25"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-navy/85 via-brand-navy/80 to-brand-navy" />
+        </>
+      )}
       <div className="absolute -right-24 -top-24 size-96 rounded-full bg-brand-blue/15 blur-3xl" />
       <Reveal className="relative mx-auto max-w-4xl px-6 text-center">
         <nav className="mb-6 flex items-center justify-center gap-1.5 text-sm text-white/50">

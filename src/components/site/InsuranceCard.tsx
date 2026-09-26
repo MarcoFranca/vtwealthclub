@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 import { resolveIcon } from "@/lib/icons";
+import { fotoLocalSeguro } from "@/lib/seguroImages";
 import { urlForImage } from "@/sanity/lib/image";
 import type { Seguro } from "@/sanity/types";
 
@@ -13,7 +14,8 @@ import type { Seguro } from "@/sanity/types";
  */
 export function InsuranceCard({ seguro }: { seguro: Seguro }) {
   const Icon = resolveIcon(seguro.beneficios?.[0]?.icone);
-  const foto = urlForImage(seguro.heroImage)?.width(640).height(800).url();
+  const foto =
+    urlForImage(seguro.heroImage)?.width(640).height(800).url() ?? fotoLocalSeguro(seguro.slug);
 
   return (
     <Link

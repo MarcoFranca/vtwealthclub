@@ -81,7 +81,7 @@ export default async function HomePage() {
             <div className="grid grid-cols-2 gap-4">
               <div className="relative col-span-1 row-span-2 aspect-[3/4] overflow-hidden rounded-3xl bg-brand-navy-light">
                 <Image
-                  src="/photos/hero-familia-hd.jpg"
+                  src="/images/hero-familia.webp"
                   alt="Família protegida pela VT Wealth Club"
                   fill
                   priority
