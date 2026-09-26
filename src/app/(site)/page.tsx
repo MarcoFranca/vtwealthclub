@@ -49,7 +49,20 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-brand-navy">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 pb-16 pt-16 md:grid-cols-2 md:pb-24 md:pt-24">
+        {/* Fundo com profundidade: brilhos + monograma da marca (estilo domaco) */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div className="absolute -right-40 -top-48 size-[40rem] rounded-full bg-brand-blue/20 blur-3xl" />
+          <div className="absolute -bottom-24 left-1/3 size-[32rem] rounded-full bg-brand-blue/10 blur-3xl" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/40 to-transparent" />
+          <Image
+            src="/logo/logo-sem-fundo-sem-texto-640-azul-300x300.png"
+            alt=""
+            width={560}
+            height={560}
+            className="absolute -bottom-20 -left-24 w-[24rem] opacity-[0.07] md:w-[34rem]"
+          />
+        </div>
+        <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 pb-16 pt-16 md:grid-cols-2 md:pb-24 md:pt-24">
           <Reveal>
             <p className="mb-4 flex items-center gap-2 text-sm font-semibold text-white/70">
               <span className="inline-block size-2 rounded-[2px] bg-brand-blue" />
@@ -79,7 +92,7 @@ export default async function HomePage() {
 
           <Reveal delay={0.15} y={30}>
             <div className="grid grid-cols-2 gap-4">
-              <div className="relative col-span-1 row-span-2 aspect-[3/4] overflow-hidden rounded-3xl bg-brand-navy-light">
+              <div className="relative col-span-1 row-span-2 aspect-[3/4] rotate-[-2deg] overflow-hidden rounded-3xl bg-brand-navy-light shadow-xl shadow-brand-navy/40 transition-transform duration-500 hover:rotate-0">
                 <Image
                   src="/images/hero-familia.webp"
                   alt="Família protegida pela VT Wealth Club"
@@ -89,7 +102,7 @@ export default async function HomePage() {
                   className="object-cover"
                 />
               </div>
-              <div className="relative aspect-square overflow-hidden rounded-3xl bg-brand-blue/20">
+              <div className="relative aspect-square rotate-[3deg] overflow-hidden rounded-3xl bg-brand-blue/20 shadow-xl shadow-brand-navy/40 transition-transform duration-500 hover:rotate-0">
                 <Image
                   src="/photos/victor-placa.jpg"
                   alt="Victor Tarouquella"
@@ -98,7 +111,7 @@ export default async function HomePage() {
                   className="object-cover object-top"
                 />
               </div>
-              <div className="relative flex aspect-square flex-col justify-end overflow-hidden rounded-3xl p-5 text-white">
+              <div className="relative flex aspect-square rotate-[-3deg] flex-col justify-end overflow-hidden rounded-3xl p-5 text-white shadow-xl shadow-brand-navy/40 transition-transform duration-500 hover:rotate-0">
                 <Image
                   src="/photos/hero-familia-hd.jpg"
                   alt="Clientes protegidos pela VT Wealth Club"
