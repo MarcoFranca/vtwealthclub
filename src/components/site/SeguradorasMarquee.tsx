@@ -16,7 +16,7 @@ const PLACEHOLDER: LogoSeguradora[] = [
   { nome: "Prudential", logoUrl: "/logos/seguradoras/prudential.svg" },
   { nome: "Porto Seguro", logoUrl: "/logos/seguradoras/porto-seguro.png" },
   { nome: "Bradesco Seguros", logoUrl: "/logos/seguradoras/bradesco-seguros.png" },
-  { nome: "SulAmérica" },
+  { nome: "SulAmérica", logoUrl: "/logos/seguradoras/sulamerica.png" },
   { nome: "Allianz", logoUrl: "/logos/seguradoras/allianz.svg" },
   { nome: "MAPFRE", logoUrl: "/logos/seguradoras/mapfre.svg" },
   { nome: "Tokio Marine", logoUrl: "/logos/seguradoras/tokio-marine.svg" },
@@ -62,7 +62,10 @@ export function SeguradorasMarquee({
         )}
       />
 
-      <div className="flex w-max animate-marquee items-center">
+      <div
+        className="flex w-max animate-marquee items-center"
+        style={{ ["--marquee-duration" as string]: "120s" }}
+      >
         {loop.map((logo, i) => (
           <div
             key={`${logo.nome}-${i}`}
