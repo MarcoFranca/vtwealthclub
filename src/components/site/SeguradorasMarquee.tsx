@@ -14,7 +14,7 @@ export type LogoSeguradora = { nome: string; logoUrl?: string };
  */
 const PLACEHOLDER: LogoSeguradora[] = [
   { nome: "Prudential", logoUrl: "/logos/seguradoras/prudential.svg" },
-  { nome: "Porto Seguro" },
+  { nome: "Porto Seguro", logoUrl: "/logos/seguradoras/porto-seguro.png" },
   { nome: "Bradesco Seguros", logoUrl: "/logos/seguradoras/bradesco-seguros.png" },
   { nome: "SulAmérica" },
   { nome: "Allianz", logoUrl: "/logos/seguradoras/allianz.svg" },
